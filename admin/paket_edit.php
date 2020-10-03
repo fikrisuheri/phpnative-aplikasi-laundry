@@ -4,7 +4,7 @@ require'functions.php';
 
 $jenis = ['kiloan','selimut','bedcover','kaos','lain'];
 
-$id_paket = $_GET['id'];
+$id_paket = stripslashes($_GET['id']);
 $queryedit = "SELECT * FROM paket WHERE id_paket = '$id_paket'";
 $edit = ambilsatubaris($conn,$queryedit);
 var_dump($edit);
@@ -12,10 +12,10 @@ $query = 'SELECT * FROM outlet';
 $data = ambildata($conn,$query);
 
 if(isset($_POST['btn-simpan'])){
-    $nama   = $_POST['nama_paket'];
-    $jenis_paket = $_POST['jenis_paket'];
-    $harga   = $_POST['harga'];
-    $outlet_id   = $_POST['outlet_id'];
+    $nama   = stripslashes($_POST['nama_paket']);
+    $jenis_paket = stripslashes($_POST['jenis_paket']);
+    $harga   = stripslashes($_POST['harga']);
+    $outlet_id   = stripslashes($_POST['outlet_id']);
 
     $query = "UPDATE paket SET nama_paket='$nama',jenis_paket='$jenis_paket',harga='$harga',outlet_id='$outlet_id' WHERE id_paket = '$id_paket'";
     
@@ -37,11 +37,11 @@ require'layout_header.php';
 <div class="container-fluid">
     <div class="row bg-title">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h4 class="page-title">Data Master <?= $title ?></h4> </div>
+            <h4 class="page-title">Data Master <?= htmlspecialchars($title); ?></h4> </div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
-                <li><a href="outlet.php"><?= $title ?></a></li>
-                <li><a href="#">Tambah <?= $title ?></a></li>
+                <li><a href="outlet.php"><?= htmlspecialchars($title); ?></a></li>
+                <li><a href="#">Tambah <?= htmlspecialchars($title); ?></a></li>
             </ol>
         </div>
         <!-- /.col-lg-12 -->
@@ -66,31 +66,31 @@ require'layout_header.php';
                 <form method="post" action="">
                 <div class="form-group">
                     <label>Nama Paket</label>
-                    <input type="text" name="nama_paket" class="form-control" value="<?= $edit['nama_paket'] ?>">
+                    <input type="text" name="nama_paket" class="form-control" value="<?= htmlspecialchars($edit['nama_paket']); ?>">
                 </div>
                 <div class="form-group">
                     <label>Jenis Paket</label>
                     <select name="jenis_paket" class="form-control">
                         <?php foreach ($jenis as $key): ?>
                             <?php if ($key == $edit['jenis_paket']): ?>
-                            <option value="<?= $key ?>" selected><?= $key ?></option>    
+                            <option value="<?= htmlspecialchars($key); ?>" selected><?= htmlspecialchars($key); ?></option>    
                             <?php endif ?>
-                            <option value="<?= $key ?>"><?= $key ?></option>
+                            <option value="<?= htmlspecialchars($key); ?>"><?= htmlspecialchars($key); ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Harga</label>
-                    <input type="text" name="harga" class="form-control" value="<?= $edit['harga'] ?>">
+                    <input type="text" name="harga" class="form-control" value="<?= htmlspecialchars($edit['harga']); ?>">
                 </div>
                 <div class="form-group">
                     <label>Pilih Outlet</label>
                     <select name="outlet_id" class="form-control">
                         <?php foreach ($data as $outlet): ?>
                             <?php if ($data['id_outlet'] == $edit['outlet_id']): ?>
-                            <option value="<?= $outlet['id_outlet'] ?>" selected><?= $outlet['nama_outlet']; ?></option>
+                            <option value="<?= htmlspecialchars($outlet['id_outlet']); ?>" selected><?= htmlspecialchars($outlet['nama_outlet']); ?></option>
                             <?php endif ?>
-                            <option value="<?= $outlet['id_outlet'] ?>"><?= $outlet['nama_outlet']; ?></option>
+                            <option value="<?= htmlspecialchars($outlet['id_outlet']); ?>"><?= htmlspecialchars($outlet['nama_outlet']); ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>
