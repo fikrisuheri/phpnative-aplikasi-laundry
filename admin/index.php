@@ -32,7 +32,7 @@ $data = ambildata($conn,$query);
                     <li>
                         <div id="sparklinedash"></div>
                     </li>
-                    <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success"><?= $joutlet['jumlahoutlet'] ?></span></li>
+                    <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success"><?= htmlspecialchars($joutlet['jumlahoutlet']); ?></span></li>
                 </ul>
             </div>
         </div>
@@ -43,7 +43,7 @@ $data = ambildata($conn,$query);
                     <li>
                         <div id="sparklinedash2"></div>
                     </li>
-                    <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple"><?= $jPelanggan['jumlahmember'] ?></span></li>
+                    <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple"><?= htmlspecialchars($jPelanggan['jumlahmember']); ?></span></li>
                 </ul>
             </div>
         </div>
@@ -54,7 +54,7 @@ $data = ambildata($conn,$query);
                     <li>
                         <div id="sparklinedash3"></div>
                     </li>
-                    <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info"><?= $jTransaksi['jumlahtransaksi'] ?></span></li>
+                    <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info"><?= htmlspecialchars($jTransaksi['jumlahtransaksi']); ?></span></li>
                 </ul>
             </div>
         </div>
@@ -80,13 +80,13 @@ $data = ambildata($conn,$query);
                             <?php $no=1; foreach($data as $transaksi): ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $transaksi['kode_invoice'] ?></td>
-                                    <td><?= $transaksi['nama_member'] ?></td>
-                                    <td><?= $transaksi['status'] ?></td>
-                                    <td><?= $transaksi['status_bayar'] ?></td>
-                                    <td><?= $transaksi['total_harga'] ?></td>
+                                    <td><?= htmlspecialchars($transaksi['kode_invoice']); ?></td>
+                                    <td><?= htmlspecialchars($transaksi['nama_member']); ?></td>
+                                    <td><?= htmlspecialchars($transaksi['status']); ?></td>
+                                    <td><?= htmlspecialchars($transaksi['status_bayar']); ?></td>
+                                    <td><?= htmlspecialchars($transaksi['total_harga']); ?></td>
                                     <td align="center">
-                                          <a href="transaksi_detail.php?id=<?= $transaksi['id_transaksi']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-success btn-block">Detail</a>
+                                          <a href="transaksi_detail.php?id=<?= htmlspecialchars($transaksi['id_transaksi']); ?>" data-toggle="tooltip" data-placement="bottom" title="Edit" class="btn btn-success btn-block">Detail</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
