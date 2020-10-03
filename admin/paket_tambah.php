@@ -5,10 +5,10 @@ $query = 'SELECT * FROM outlet';
 $data = ambildata($conn,$query);
 
 if(isset($_POST['btn-simpan'])){
-    $nama   = $_POST['nama_paket'];
-    $jenis_paket = $_POST['jenis_paket'];
-    $harga   = $_POST['harga'];
-    $outlet_id   = $_POST['outlet_id'];
+    $nama   = stripslashes($_POST['nama_paket']);
+    $jenis_paket = stripslashes($_POST['jenis_paket']);
+    $harga   = stripslashes($_POST['harga']);
+    $outlet_id   = stripslashes($_POST['outlet_id']);
 
     $query = "INSERT INTO paket (nama_paket,jenis_paket,harga,outlet_id) values ('$nama','$jenis_paket','$harga','$outlet_id')";
     
@@ -30,11 +30,11 @@ require'layout_header.php';
 <div class="container-fluid">
     <div class="row bg-title">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h4 class="page-title">Data Master <?= $title ?></h4> </div>
+            <h4 class="page-title">Data Master <?= htmlspecialchars($title); ?></h4> </div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
-                <li><a href="outlet.php"><?= $title ?></a></li>
-                <li><a href="#">Tambah <?= $title ?></a></li>
+                <li><a href="outlet.php"><?= htmlspecialchars($title); ?></a></li>
+                <li><a href="#">Tambah <?= htmlspecialchars($title); ?></a></li>
             </ol>
         </div>
         <!-- /.col-lg-12 -->
@@ -80,7 +80,7 @@ require'layout_header.php';
                     <label>Pilih Outlet</label>
                     <select name="outlet_id" class="form-control">
                         <?php foreach ($data as $outlet): ?>
-                            <option value="<?= $outlet['id_outlet'] ?>"><?= $outlet['nama_outlet']; ?></option>
+                            <option value="<?= $outlet['id_outlet'] ?>"><?= htmlspecialchars($outlet['nama_outlet']); ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>
