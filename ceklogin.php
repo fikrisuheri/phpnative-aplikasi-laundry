@@ -2,7 +2,7 @@
 session_start();
 $conn = mysqli_connect('localhost','root','','ujikom_laundry');
 
-$username = $_POST['username'];
+$username = stripslashes($_POST['username']);
 $password = md5($_POST['password']);
 $query = "SELECT * FROM user where username='$username' AND password = '$password'";
 $row = mysqli_query($conn,$query);
@@ -34,4 +34,3 @@ if($cek > 0){
     $msg = 'Username Atau Password Salah';
     header('location:index.php?msg='.$msg);
 }
-?>
