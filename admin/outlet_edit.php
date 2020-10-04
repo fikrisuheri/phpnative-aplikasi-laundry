@@ -1,25 +1,25 @@
 <?php
 $title = 'outlet';
 require'functions.php';
-$query = 'SELECT outlet.*, user.nama_user,user.id_user FROM outlet LEFT JOIN user ON user.outlet_id = outlet.id_outlet WHERE id_outlet = ' . $_GET['id'];
+$query = 'SELECT outlet.*, user.nama_user,user.id_user FROM outlet LEFT JOIN user ON user.outlet_id = outlet.id_outlet WHERE id_outlet = ' . stripslashes($_GET['id']);
 $data = ambilsatubaris($conn,$query);
 
 $query2 = 'SELECT user.*,outlet.nama_outlet FROM outlet RIGHT JOIN user ON user.outlet_id = outlet.id_outlet WHERE user.role = "owner" order by user.outlet_id asc';
 $data2 = ambildata($conn,$query2);
 if(isset($_POST['btn-simpan'])){
-    $nama   = $_POST['nama_outlet'];
-    $alamat = $_POST['alamat_outlet'];
-    $telp   = $_POST['telp_outlet'];
+    $nama   = stripslashes($_POST['nama_outlet']);
+    $alamat = stripslashes($_POST['alamat_outlet']);
+    $telp   = stripslashes($_POST['telp_outlet']);
 
-    $query = "UPDATE outlet SET nama_outlet = '$nama' , alamat_outlet = '$alamat' , telp_outlet='$telp' WHERE id_outlet = " . $_GET['id'];
+    $query = "UPDATE outlet SET nama_outlet = '$nama' , alamat_outlet = '$alamat' , telp_outlet='$telp' WHERE id_outlet = " . stripslashes($_GET['id']);
     
     
     if($_POST['owner_id_new']){
-        $query2 = "UPDATE user SET outlet_id = '" . $_GET['id'] . "' WHERE id_user = " . $_POST['owner_id_new'];
-        $query3 = "UPDATE user SET outlet_id = NULL WHERE id_user = " . $data['id_user'];
+        $query2 = "UPDATE user SET outlet_id = '" . stripslashes($_GET['id']) . "' WHERE id_user = " . $_POST['owner_id_new'];
+        $query3 = "UPDATE user SET outlet_id = NULL WHERE id_user = " . stripslashes($data['id_user']);
         $execute3 = bisa($conn,$query3);
     }else{
-        $query2 = "UPDATE user SET outlet_id = '" . $_GET['id'] . "' WHERE id_user = " . $_POST['owner_id'];
+        $query2 = "UPDATE user SET outlet_id = '" . stripslashes($_GET['id']) . "' WHERE id_user = " . stripslashes($_POST['owner_id']);
     }
 
     $execute = bisa($conn,$query);
@@ -75,22 +75,22 @@ require'layout_header.php';
                 </div>
                 <div class="form-group">
                     <label>Alamat Outlet</label>
-                    <textarea name="alamat_outlet" class="form-control"><?= $data['alamat_outlet']; ?></textarea>
+                    <textarea name="alamat_outlet" class="form-control"><?= htmlspecialchars($data['alamat_outlet']); ?></textarea>
                 </div>
                 <div class="form-group">
                     <label>Nomor Telepon</label>
-                    <input type="text" value="<?= $data['telp_outlet']; ?>" name="telp_outlet" class="form-control">
+                    <input type="text" value="<?= htmlspecialchars($data['telp_outlet']); ?>" name="telp_outlet" class="form-control">
                 </div>
                 <?php if($data['nama_user']  == null): ?>
                     <div class="form-group">
                         <label>Belum Ada Owner (silahkan pilih owner)</label>
                         <select name="owner_id" class="form-control">
                             <?php foreach ($data2 as $owner): ?>
-                                <option value="<?= $owner['id_user'] ?>"><?= $owner['nama_user'] ?> 
+                                <option value="<?= htmlspecialchars($owner['id_user']); ?>"><?= htmlspecialchars($owner['nama_user']); ?> 
                                     <?php if ($owner['outlet_id'] == null): ?>
                                         ( Belum memiliki outlet )
                                     <?php else: ?>
-                                        ( Owner di <?= $owner['nama_outlet'] ?> )
+                                        ( Owner di <?= htmlspecialchars($owner['nama_outlet']); ?> )
                                     <?php endif ?>                                    
                                 </option>
                             <?php endforeach ?>
@@ -98,15 +98,15 @@ require'layout_header.php';
                     </div>
                 <?php else: ?>
                     <div class="form-group">
-                        <label>Owner Sekarang : <?= $data['nama_user']; ?></label>
+                        <label>Owner Sekarang : <?= htmlspecialchars($data['nama_user']); ?></label>
                         <select name="owner_id_new" class="form-control">
                             <option class="">Pilih Untuk Mengganti owner</option>
                             <?php foreach ($data2 as $owner): ?>
-                                <option value="<?= $owner['id_user'] ?>"><?= $owner['nama_user'] ?> 
+                                <option value="<?= htmlspecialchars($owner['id_user']); ?>"><?= htmlspecialchars($owner['nama_user']); ?> 
                                     <?php if ($owner['outlet_id'] == null): ?>
                                         ( Belum memiliki outlet )
                                     <?php else: ?>
-                                        ( Owner di <?= $owner['nama_outlet'] ?> )
+                                        ( Owner di <?= htmlspecialchars($owner['nama_outlet']); ?> )
                                     <?php endif ?>                                    
                                 </option>
                             <?php endforeach ?>

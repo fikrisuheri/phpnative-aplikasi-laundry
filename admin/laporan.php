@@ -36,7 +36,7 @@ WHERE transaksi.status_bayar = 'dibayar' GROUP BY detail_transaksi.paket_id");
                     <li>
                         <div id="sparklinedash"></div>
                     </li>
-                    <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success"><?= $tahun['total'] ?></span></li>
+                    <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success"><?= htmlspecialchars($tahun['total']); ?></span></li>
                 </ul>
             </div>
         </div>
@@ -47,7 +47,7 @@ WHERE transaksi.status_bayar = 'dibayar' GROUP BY detail_transaksi.paket_id");
                     <li>
                         <div id="sparklinedash2"></div>
                     </li>
-                    <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple"><?= $bulan['total'] ?></span></li>
+                    <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple"><?= htmlspecialchars($bulan['total']); ?></span></li>
                 </ul>
             </div>
         </div>
@@ -58,7 +58,7 @@ WHERE transaksi.status_bayar = 'dibayar' GROUP BY detail_transaksi.paket_id");
                     <li>
                         <div id="sparklinedash3"></div>
                     </li>
-                    <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info"><?= $minggu['total'] ?></span></li>
+                    <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info"><?= htmlspecialchars($minggu['total']); ?></span></li>
                 </ul>
             </div>
         </div>
@@ -82,10 +82,10 @@ WHERE transaksi.status_bayar = 'dibayar' GROUP BY detail_transaksi.paket_id");
                             <?php $no=1; foreach($penjualan as $transaksi): ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $transaksi['nama_paket'] ?></td>
-                                    <td><?= $transaksi['jumlah_paket'] ?></td>
-                                    <td><?= $transaksi['tgl_pembayaran'] ?></td>
-                                    <td><?= $transaksi['total'] ?></td>                                    
+                                    <td><?= htmlspecialchars($transaksi['nama_paket']); ?></td>
+                                    <td><?= htmlspecialchars($transaksi['jumlah_paket']); ?></td>
+                                    <td><?= htmlspecialchars($transaksi['tgl_pembayaran']); ?></td>
+                                    <td><?= htmlspecialchars($transaksi['total']); ?></td>                                    
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
