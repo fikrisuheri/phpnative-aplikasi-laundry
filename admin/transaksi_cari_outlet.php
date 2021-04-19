@@ -2,17 +2,17 @@
 $title = 'pelanggan';
 require 'functions.php';
 require 'layout_header.php';
-$query = 'SELECT * FROM member';
+$query = 'SELECT * FROM outlet';
 $data = ambildata($conn,$query);
 ?> 
 <div class="container-fluid">
     <div class="row bg-title">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h4 class="page-title">Pilih Pelanggan</h4> </div>
+            <h4 class="page-title">Pilih Outlet</h4> </div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
                 <li><a href="#">Transaksi</a></li>
-                <li><a href="#">Tambah Transaksi</a></li>
+                <li><a href="#">Pilih Outlet</a></li>
             </ol>
         </div>
         <!-- /.col-lg-12 -->
@@ -36,9 +36,7 @@ $data = ambildata($conn,$query);
                                 <th width="5%">#</th>
                                 <th>Nama</th>
                                 <th>Alamat</th>
-                                <th>JK</th>
                                 <th>Telepon</th>
-                                <th>No KTP</th>
                                 <th width="15%">Aksi</th>
                             </tr>
                         </thead>
@@ -46,13 +44,11 @@ $data = ambildata($conn,$query);
                             <?php foreach($data as $member): ?>
                                 <tr>
                                     <td></td>
-                                    <td><?= $member['nama_member'] ?></td>
-                                    <td><?= $member['alamat_member'] ?></td>
-                                    <td><?= $member['jenis_kelamin'] ?></td>
-                                    <td><?= $member['telp_member'] ?></td>
-                                    <td><?= $member['no_ktp'] ?></td>
+                                    <td><?= $member['nama_outlet'] ?></td>
+                                    <td><?= $member['alamat_outlet'] ?></td>
+                                    <td><?= $member['telp_outlet'] ?></td>
                                     <td align="center">
-                                          <a href="transaksi_cari_outlet.php?id=<?= $member['id_member']; ?>" data-toggle="tooltip" data-placement="bottom" title="Pilih" class="btn btn-primary btn-block">PILIH</a>
+                                          <a href="transaksi_tambah.php?id=<?= $_GET['id']; ?>&outlet_id=<?= $member['id_outlet'] ?>" data-toggle="tooltip" data-placement="bottom" title="Pilih" class="btn btn-primary btn-block">PILIH</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

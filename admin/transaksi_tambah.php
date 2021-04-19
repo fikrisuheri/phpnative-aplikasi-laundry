@@ -8,7 +8,7 @@ $batas_waktu  = date("Y-m-d h:i:s", $tujuh_hari);
 
 
 $invoice   = 'DRY'.Date('Ymdsi');
-$outlet_id = $_SESSION['outlet_id'];
+$outlet_id = $_GET['outlet_id'];
 $user_id   = $_SESSION['user_id']; 
 $member_id = $_GET['id'];
 

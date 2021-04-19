@@ -77,7 +77,6 @@ $data = ambildata($conn,$query);
 </div>
 <?php
 require'layout_footer.php';
-<?php
 $title = 'outlet';
 require 'functions.php';
 require 'layout_header.php';
